@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CORS XSS Exploit Example</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<h1>CORS XSS Exploit Example</h1>
+
+	<form id="contact-form" action="http://vulnerable-website.com/contact.php" method="POST">
+		<label for="name">Name:</label>
+		<input type="text" name="name" id="name"><br><br>
+
+		<label for="email">Email:</label>
+		<input type="email" name="email" id="email"><br><br>
+
+		<label for="message">Message:</label>
+		<textarea name="message" id="message"></textarea><br><br>
+
+		<button type="submit">Send Message</button>
+	</form>
+
+	<script>
+		$(document).ready(function() {
+			$("#contact-form").submit(function(event) {
+				event.preventDefault();
+				var name = $("#name").val();
+				var message = $("#message").val();
+				var url = "http://vulnerable-website.com/contact.php?name=" + name + "&message=" + message;
+				$.get(url, function(data) {
+					$("#output").html(data);
+				});
+			});
+		});
+	</script>
+</body>
+</html>
+
