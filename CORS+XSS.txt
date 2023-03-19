@@ -1,0 +1,10 @@
+Start Burp Suite and configure your browser to use Burp as a proxy.
+Navigate to the web application you want to test.
+In Burp, go to the "Proxy" tab and make sure that intercept is turned on.
+In your browser, perform an action that triggers a CORS request, such as submitting a form or loading a resource from a different domain.
+When the request is intercepted by Burp, forward it to the server and observe the response in the "Proxy" or "Repeater" tabs.
+Analyze the response for any unexpected behavior or potential vulnerabilities, such as access control issues, unauthorized data disclosure, or injection attacks.
+If the response includes a URL parameter or header that may be vulnerable to XSS, modify the parameter value to include a script payload that can be executed in the browser.
+Forward the request to the server and observe the response in the "Proxy" or "Repeater" tabs.
+Analyze the response for any signs of XSS, such as unexpected script execution, page redirection, or cookie stealing.
+If XSS is confirmed, you can modify the script payload to perform more advanced attacks, such as data exfiltration, keylogging, or password stealing.
