@@ -1,0 +1,10 @@
+Start Burp Suite and configure your browser to use Burp as a proxy.
+Navigate to the web application you want to test.
+In Burp, go to the "Proxy" tab and make sure that intercept is turned on.
+In your browser, perform an action that triggers a CORS request, such as submitting a form or loading a resource from a different domain.
+When the request is intercepted by Burp, forward it to the server and observe the response in the "Proxy" or "Repeater" tabs.
+Analyze the response for any unexpected behavior or potential vulnerabilities, such as access control issues, unauthorized data disclosure, or injection attacks.
+If the response includes a URL parameter that may be vulnerable to SSRF, modify the parameter value to point to a different domain or IP address that you control.
+Forward the request to the server and observe the response in the "Proxy" or "Repeater" tabs.
+Analyze the response for any signs of SSRF, such as unexpected requests to external resources or responses containing sensitive information.
+If SSRF is confirmed, you can modify the request further to perform more advanced attacks, such as port scanning, network reconnaissance, or remote code execution.
